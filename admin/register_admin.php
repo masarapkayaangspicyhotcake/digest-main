@@ -1,97 +1,81 @@
 <?php
 
-include '../components/connect.php';
+require_once '../components/connect.php';
+
 $db = new Database();
 $conn = $db->connect();
 
 session_start();
 
-$account = $_SESSION['account_id'];
+// Check if user is superadmin
+if (!isset($_SESSION['account_id']) || $_SESSION['role'] !== 'superadmin') {
+    header('location: admin_login.php');
+    exit();
+}
 
-if(!isset($admin_id)){
-   header('location:admin_login.php');
-};
+if (isset($_POST['register'])) {
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $middlename = $_POST['middlename'];
+    $user_name = $_POST['user_name'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hash password for security
+    $role = $_POST['role'];
 
-if(isset($_POST['submit'])){
+    // Ensure only superadmin and subadmin can be created
+    if ($role !== 'superadmin' && $role !== 'subadmin') {
+        echo "<script>alert('Invalid role selection.');</script>";
+    } else {
+        // Check for duplicate username or email
+        $check_account = $conn->prepare("SELECT * FROM `accounts` WHERE user_name = ? OR email = ?");
+        $check_account->execute([$user_name, $email]);
 
-   $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
-   $pass = sha1($_POST['pass']);
-   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
-   $cpass = sha1($_POST['cpass']);
-   $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
-
-   $select_admin = $conn->prepare("SELECT * FROM `users` WHERE name = ? AND role = 'admin'");
-   $select_admin->execute([$name]);
-   
-   if($select_admin->rowCount() > 0){
-      $message[] = 'username already exists!';
-   }else{
-      if($pass != $cpass){
-         $message[] = 'confirm passowrd not matched!';
-      }else{
-         $insert_admin = $conn->prepare("INSERT INTO `users`(name, password, role) VALUES(?,?,?)");
-         $insert_admin->execute([$name, $cpass, 'admin']);
-         $message[] = 'new admin registered!';
-      }
-   }
-
+        if ($check_account->rowCount() > 0) {
+            echo "<script>alert('Username or Email already exists.');</script>";
+        } else {
+            // Insert new admin
+            $insert_admin = $conn->prepare("INSERT INTO `accounts` (firstname, lastname, middlename, user_name, email, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $insert_admin->execute([$firstname, $lastname, $middlename, $user_name, $email, $password, $role]);
+            echo "<script>alert('Admin registered successfully.'); window.location.href='admin_accounts.php';</script>";
+        }
+    }
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>register</title>
-
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="../css/admin_style.css">
-
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Admin</title>
+    <link rel="stylesheet" href="../css/admin_style.css">
 </head>
+
 <body>
-
-<?php include '../components/admin_header.php' ?>
-
-<!-- register admin section starts  -->
+<?php include '../components/superadmin_sidebar.php'; ?>
 
 <section class="form-container">
+    <form action="" method="post">
+        <h1>Register Admin</h1>
+        <input type="text" name="firstname" placeholder="First Name" required />
+        <input type="text" name="lastname" placeholder="Last Name" required />
+        <input type="text" name="middlename" placeholder="Middle Name" required />
+        <input type="text" name="user_name" placeholder="Username" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        
+        <!-- Role Selection (Superadmin can only create Subadmin or another Superadmin) -->
+        <select name="role" required>
+            <option value="subadmin">Subadmin</option>
+            <option value="superadmin">Superadmin</option>
+        </select>
 
-   <form action="" method="POST">
-      <h3>register new</h3>
-      <input type="text" name="name" maxlength="20" required placeholder="enter your username" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="pass" maxlength="20" required placeholder="enter your password" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="password" name="cpass" maxlength="20" required placeholder="confirm your password" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-      <input type="submit" value="register now" name="submit" class="btn">
-   </form>
-
+        <button type="submit" name="register" class="btn">Register Admin</button>
+    </form>
 </section>
-
-<!-- register admin section ends -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- custom js file link  -->
-<script src="../js/admin_script.js"></script>
 
 </body>
 </html>

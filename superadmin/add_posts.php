@@ -115,7 +115,7 @@ if(isset($_POST['draft'])){
 </head>
 <body>
 
-<?php include '../components/admin_header.php' ?>
+<?php include '../components/superadmin_sidebar.php' ?>
 
 <section class="post-editor">
    <h1 class="heading">Add New Post</h1>

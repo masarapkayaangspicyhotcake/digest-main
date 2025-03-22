@@ -1,11 +1,12 @@
 <?php
+session_start();
+
 include '../components/connect.php';
 
 $db = new Database();
 $conn = $db->connect();
 
 
-session_start();
 
 if(isset($_POST['submit'])){
 
@@ -15,7 +16,7 @@ if(isset($_POST['submit'])){
    $pass = filter_var($pass, FILTER_SANITIZE_STRING);
 
    // Fetch admin details including role
-   $select_admin = $conn->prepare("SELECT * FROM `accounts` WHERE email = ? AND password = ? AND role = 'subadmin'");
+   $select_admin = $conn->prepare("SELECT * FROM `accounts` WHERE email = ? AND password = ? AND role IN ('subadmin', 'superadmin')");
    $select_admin->execute([$email, $pass]);
    
    if($select_admin->rowCount() > 0){
