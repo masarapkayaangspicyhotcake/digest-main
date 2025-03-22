@@ -34,11 +34,11 @@ if (isset($_POST['delete_comment'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    <!-- Custom CSS File -->
-   <link rel="stylesheet" href="../css/admin_style.css">
+   <link rel="stylesheet" href="css/admin_style.css">
 </head>
 <body>
 
-<?php include '../components/subadmin_sidebar.php'; ?>
+<?php include 'components/subadmin_sidebar.php'; ?>
 
 <section class="comments">
    <h1 class="heading">Posts Comments</h1>

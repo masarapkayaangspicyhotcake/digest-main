@@ -12,7 +12,7 @@ $conn = $db->connect();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../css/landing_page.css">
+    <link rel="stylesheet" href="css/landing_page.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -21,13 +21,13 @@ $conn = $db->connect();
         <div class="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="../imgs/cover.jpg" alt="Slide 1">
+                    <img src="imgs/cover.jpg" alt="Slide 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="../imgs/c2.jpg" alt="Slide 2">
+                    <img src="imgs/c2.jpg" alt="Slide 2">
                 </div>
                 <div class="carousel-item">
-                    <img src="../imgs/c3.jpg" alt="Slide 3">
+                    <img src="imgs/c3.jpg" alt="Slide 3">
                 </div>
             </div>
 
@@ -62,10 +62,10 @@ $conn = $db->connect();
             <h1 style="color:#4F0003;">About the University Digest</h1>
             <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <br>
-            <a href="../content/about_us.php" class="read-more-button">More About Us</a>
+            <a href="content/about_us.php" class="read-more-button">More About Us</a>
         </div>
         <div class="card-image">
-            <img src="../imgs/logo_trans.png" alt="Sample Image">
+            <img src="imgs/logo_trans.png" alt="Sample Image">
         </div>
     </div>
 
@@ -77,25 +77,25 @@ $conn = $db->connect();
                 <i class="fas fa-newspaper"></i>
                 <h4>News</h4>
                 <p>Short description 1</p>
-                <a href="../content/news.php" class="explore-button">Explore</a>
+                <a href="content/news.php" class="explore-button">Explore</a>
             </div>
             <div class="smaller-card">
                 <i class="fas fa-book"></i> <!-- Changed to a free Font Awesome icon -->
                 <h4>Magazines</h4>
                 <p>Short description 2</p>
-                <a href="../content/e_magazines.php" class="explore-button">Explore</a> <!-- Fixed link -->
+                <a href="content/e_magazines.php" class="explore-button">Explore</a> <!-- Fixed link -->
             </div>
             <div class="smaller-card">
                 <i class="fas fa-pencil-alt"></i>
                 <h4>Editorial</h4>
                 <p>Short description 3</p>
-                <a href="../content/editorial.php" class="explore-button">Explore</a> <!-- Fixed link -->
+                <a href="content/editorial.php" class="explore-button">Explore</a> <!-- Fixed link -->
             </div>
             <div class="smaller-card">
                 <i class="fas fa-asterisk"></i>
                 <h4>Miscellaneous</h4>
                 <p>Short description 4</p>
-                <a href="../content/misc.php" class="explore-button">Explore</a> <!-- Fixed link -->
+                <a href="content/misc.php" class="explore-button">Explore</a> <!-- Fixed link -->
             </div>
         </div>
     </div>
@@ -106,7 +106,7 @@ $conn = $db->connect();
             <h1 style="color:#4F0003;">Announcements</h1>
             <p>"Stay updated with the latest announcements and news from the university. From important dates to upcoming events, find all the information you need right here."</p>
             <br>
-            <a href="../content/announcements.php" class="read-more-button">View Announcements</a>
+            <a href="content/announcements.php" class="read-more-button">View Announcements</a>
         </div>
         <!-- <div class="card-image">
             <img src="../imgs/announcement.png" alt="Announcements Image">
@@ -117,9 +117,9 @@ $conn = $db->connect();
     <div class="card-container">
         <div class="card">
             <h5 class="card-header">Tejidos</h5>
-            <img src="../imgs/tejidos.jpg" alt="Tejidos Image" class="card-img4">
+            <img src="imgs/tejidos.jpg" alt="Tejidos Image" class="card-img4">
             <div class="card-body">
-                <a href="../content/more_tejidos.php" class="btn">View Now</a>
+                <a href="content/more_tejidos.php" class="btn">View Now</a>
             </div>
         </div>
     </div>
@@ -127,6 +127,6 @@ $conn = $db->connect();
 
 <!-- Footer -->
 <?php include 'footer.php'; ?>
-<script src="../js/script.js"></script> <!-- Fixed script path -->
+<script src="js/script.js"></script> <!-- Fixed script path -->
 </body>
 </html>
