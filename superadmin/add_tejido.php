@@ -64,7 +64,7 @@ $tejido_posts = $select_tejido->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 
-<?php include '../components/superadmin_sidebar.php' ?>
+      <?php include '../components/superadmin_sidebar.php' ?>
 
 <section class="add-tejido">
    <h1 class="heading">Add Tejido</h1>

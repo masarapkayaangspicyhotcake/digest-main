@@ -10,7 +10,7 @@ $admin_id = $_SESSION['admin_id'] ?? null;
 $admin_role = $_SESSION['admin_role'] ?? null;
 
 // Redirect if not logged in or not a subadmin
-if(!isset($admin_id) || $admin_role != 'subadmin'){
+if(!isset($admin_id) || $admin_role != 'superadmin'){
    header('location:../admin_content/admin_login.php');
    exit();
 }
@@ -115,7 +115,7 @@ if(isset($_POST['draft'])){
 </head>
 <body>
 
-<?php include '../components/subadmin_sidebar.php' ?>
+<?php include '../components/superadmin_sidebar.php' ?>
 
 <section class="post-editor">
    <h1 class="heading">Add New Post</h1>
