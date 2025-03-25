@@ -14,7 +14,7 @@
     <div class="logo-container">
         <a href="../home.php">
             <img src="../imgs/logo.png" alt="The University Digest Logo">
-            <div class="logo"><h1>The University Digest</h1></div>
+            <div class="logo"><h2>The University Digest</h2></div>
         </a>
     </div>
     <div class="search-box">
