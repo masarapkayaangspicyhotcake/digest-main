@@ -1,90 +1,109 @@
 <?php
-include '../components/connect.php';
+require_once 'classes/organization.class.php';
+$organization = new Organization();
+$organizations = $organization->getOrganizations() ?: [];
 
-$db = new Database();
-$conn = $db->connect();
-
-session_start();
-
-$admin_id = $_SESSION['admin_id'];
-
-if (!isset($admin_id)) {
-   header('location:admin_login.php');
-   exit();
-}
-
-if (isset($_POST['delete_comment'])) {
-   $comment_id = $_POST['comment_id'];
-   $comment_id = filter_var($comment_id, FILTER_SANITIZE_STRING);
-   $delete_comment = $conn->prepare("DELETE FROM `comments` WHERE comment_id = ?");
-   $delete_comment->execute([$comment_id]);
-   $message[] = 'Comment deleted!';
+// Handle AJAX requests for adding/editing/deleting members
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $action = $_POST['action'];
+    switch ($action) {
+        case 'add':
+            echo $organization->addOrganization($_POST);
+            exit();
+        case 'edit':
+            echo $organization->editOrganization($_POST);
+            exit();
+        case 'delete':
+            echo $organization->deleteOrganization($_POST['org_id']);
+            exit();
+    }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Users Accounts</title>
-
-   <!-- Font Awesome CDN -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
-   <!-- Custom CSS File -->
-   <link rel="stylesheet" href="../css/admin_style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organizational Chart</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../js/organization.js"></script>
+    <style>
+        .tree ul {
+            padding-top: 20px; position: relative;
+            transition: .5s;
+        }
+        .tree li {
+            display: inline-block; text-align: center;
+            list-style-type: none;
+            position: relative; padding: 20px;
+        }
+        .tree li::before, .tree li::after {
+            content: ''; position: absolute; top: 0; right: 50%;
+            border-top: 2px solid #ccc; width: 50%; height: 20px;
+        }
+        .tree li::after {
+            right: auto; left: 50%; border-left: 2px solid #ccc;
+        }
+        .tree li:only-child::after, .tree li:only-child::before {
+            display: none;
+        }
+        .tree li:only-child { padding-top: 0; }
+        .card {
+            padding: 10px; background-color: #fff; border-radius: 8px;
+            border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        img {
+            width: 80px; height: 80px; border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Organizational Chart</h1>
 
-<?php include '../components/superadmin_sidebar.php'; ?>
-
-<section class="comments">
-   <h1 class="heading">Posts Comments</h1>
-   
-   <p class="comment-title">Post Comments</p>
-   <div class="box-container">
-      <?php
-         // Fetch comments on posts created by the admin
-         $select_comments = $conn->prepare("
-            SELECT comments.*, posts.title 
-            FROM `comments` 
-            JOIN `posts` ON comments.post_id = posts.post_id 
-            WHERE posts.created_by = ?
-         ");
-         $select_comments->execute([$admin_id]);
-
-         if ($select_comments->rowCount() > 0) {
-            while ($fetch_comments = $select_comments->fetch(PDO::FETCH_ASSOC)) {
-      ?>
-               <div class="post-title">From: <span><?= $fetch_comments['title']; ?></span> 
-                  <a href="read_post.php?post_id=<?= $fetch_comments['post_id']; ?>">View Post</a>
-               </div>
-               <div class="box">
-                  <div class="user">
-                     <i class="fas fa-user"></i>
-                     <div class="user-info">
-                        <span><?= $fetch_comments['commented_by']; ?></span>
-                        <div><?= $fetch_comments['commented_at']; ?></div>
-                     </div>
-                  </div>
-                  <div class="text"><?= $fetch_comments['comment']; ?></div>
-                  <form action="" method="POST">
-                     <input type="hidden" name="comment_id" value="<?= $fetch_comments['comment_id']; ?>">
-                     <button type="submit" class="inline-delete-btn" name="delete_comment" onclick="return confirm('Delete this comment?');">Delete Comment</button>
-                  </form>
-               </div>
-      <?php
-            }
-         } else {
-            echo '<p class="empty">No comments added yet!</p>';
-         }
-      ?>
-   </div>
-</section>
-
-<!-- Custom JS File -->
-<script src="../js/admin_script.js"></script>
+        <div class="tree">
+            <ul>
+                <?php 
+                if (!empty($organizations)) {
+                    foreach ($organizations as $org) {
+                        if ($org['position'] === 'Adviser') { ?>
+                            <li>
+                                <div class="card">
+                                    <?php if($org['image'] != ''){ ?>
+                                        <img src="uploads/members/<?= basename($org['image']); ?>" alt="Adviser Image">
+                                    <?php } else { ?>
+                                        <img src="./imgs/member.jpg" alt="Default Member Image">
+                                    <?php } ?>
+                                    <h4><?= htmlspecialchars($org['name']) ?></h4>
+                                    <p><?= htmlspecialchars($org['position']) ?></p>
+                                </div>
+                                <ul>
+                                    <?php foreach ($organizations as $childOrg) {
+                                        if ($childOrg['position'] !== 'Adviser') { ?>
+                                            <li>
+                                                <div class="card">
+                                                    <?php if($childOrg['image'] != ''){ ?>
+                                                        <img src="uploads/members/<?= basename($childOrg['image']); ?>" alt="Member Image">
+                                                    <?php } else { ?>
+                                                        <img src="./imgs/member.jpg" alt="Default Member Image">
+                                                    <?php } ?>
+                                                    <h4><?= htmlspecialchars($childOrg['name']) ?></h4>
+                                                    <p><?= htmlspecialchars($childOrg['position']) ?></p>
+                                                </div>
+                                            </li>
+                                        <?php }
+                                    } ?>
+                                </ul>
+                            </li>
+                        <?php }
+                    }
+                } else {
+                    echo "<p>No organizational members found.</p>";
+                }
+                ?>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

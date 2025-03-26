@@ -38,16 +38,42 @@ if (!$fetch_profile) {
 
     <nav class="navbar">
         <a href="../superadmin/superadmin_home.php"><i class="fas fa-home"></i> <span>Dashboard</span></a>
-        <a href="../superadmin/add_posts.php"><i class="fas fa-pen"></i> <span>Add Posts</span></a>
-        <a href="../superadmin/add_tejido.php"><i class="fas fa-pen"></i> <span>Add Tejido</span></a>
+
+        <div class="dropdown">
+            <a href="#" class="dropdown-toggle" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-pen"></i> <span>Manage Posts</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                <li><a href="../superadmin/add_posts.php" class="dropdown-item"><i class="fas fa-file-alt"></i> Add Posts</a></li>
+                <li><a href="../superadmin/add_tejido.php" class="dropdown-item"><i class="fas fa-newspaper"></i> Add Tejido</a></li>
+            </ul>
+        </div>
+
         <a href="../superadmin/view_posts.php"><i class="fas fa-home"></i> <span>Drafts</span></a>
+
         <a href="../superadmin/admin_accounts.php"><i class="fas fa-pen"></i> <span>Manage Admins</span></a>
+
         <a href="../superadmin/user_accounts_management.php"><i class="fas fa-pen"></i> <span>Users</span></a>
+
         <a href="../superadmin/view_posts.php"><i class="fas fa-eye"></i> <span>View Posts</span></a>
+
         <a href="../components/admin_logout.php" style="color:var(--red);" onclick="return confirm('Logout from the website?');">
             <i class="fas fa-right-from-bracket"></i><span>Logout</span>
         </a>
     </nav>
+
 </header>
 
 <div id="menu-btn" class="fas fa-bars"></div>
+
+<!-- Bootstrap JS for dropdowns -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+    }
+</style>

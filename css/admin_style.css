@@ -5,16 +5,22 @@
 /*universal designs for subadmin*/
 
 :root{
-   --main-color:#4F0003;
+   --main-color:#EEA61A;
    --red:#e74c3c;
-   --orange:#4F0003;
+   --orange:#EEA61A;
    --black:#34495e;
    --white:#fff;
    --light-bg:#f5f5f5;
    --light-color:#999;
    --border:.2rem solid var(--black);
    --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+   --maroon: #4F0003;       /* Deep maroon color */
+   --gold: #EEA61A;         /* Rich gold color */
+   --white: #ffffff;
+   --black: #34495e;
+   --light-bg: #f5f5f5;
 }
+
 
 *{
    font-family: 'Montserrat', sans-serif;
@@ -45,6 +51,40 @@
 html{
    font-size: 62.5%;
    overflow-x: hidden;
+}
+
+.dropdown {
+   position: relative;
+}
+
+.dropdown-toggle::after {
+   content: '\25BC'; /* Down arrow */
+   margin-left: 10px;
+   font-size: 0.7em;
+}
+
+.dropdown-menu {
+   display: none;
+   position: absolute;
+   background-color: var(--maroon);
+   min-width: 200px;
+   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+   z-index: 1;
+}
+
+.dropdown:hover .dropdown-menu {
+   display: block;
+}
+
+.dropdown-item {
+   color: var(--black);
+   padding: 12px 16px;
+   text-decoration: none;
+   display: block;
+}
+
+.dropdown-item:hover {
+   background-color: var(--light-bg);
 }
 
 body{
@@ -213,62 +253,97 @@ section{
    font-size: 1.8rem;
    border-radius: .5rem;
 }
-
-.header{
+.header {
    position: fixed;
-   top:0; left:0;
-   background-color: var(--white);
+   top: 0;
+   left: 0;
+   background-color: var(--maroon);
+   color: var(--white);
    z-index: 1000;
-   border-right: var(--border);
    width: 35rem;
-   padding:2rem;
+   padding: 2rem;
    min-height: 100vh;
    text-align: center;
+   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.header .logo{
+.header .logo {
    font-size: 2.5rem;
-   color:var(--black);
+   color: var(--white);
+   margin-bottom: 2rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
-.header .logo span{
-   color:var(--main-color);
+.header .logo span {
+   color: var(--gold);
+   margin-left: 0.5rem;
 }
 
-.header .profile{
-   padding:2rem;
-   border-radius: .5rem;
-   background-color: var (--light-bg);
-   margin:2rem 0;
-   border:var(--border);
+.header .profile {
+   padding: 2rem;
+   border-radius: 0.5rem;
+   background-color: rgba(238, 166, 26, 0.1);  /* Soft gold background */
+   margin: 2rem 0;
+   border: 2px solid var(--gold);
+   transition: all 0.3s ease;
 }
 
-.header .profile p{
+.header .profile:hover {
+   background-color: rgba(238, 166, 26, 0.2);
+   transform: translateY(-5px);
+}
+
+.header .profile p {
    margin-bottom: 1.5rem;
    font-size: 2rem;
-   color:var(--black);
+   color: var(--white);
 }
 
-.header .navbar{
-   padding:1rem;
+.header .navbar {
+   padding: 1rem;
 }
 
-.header .navbar a{
+.header .navbar a {
    display: block;
-   padding:2rem 0;
-   font-size: 2rem;
-   color:var(--black);
+   padding: 1.5rem 1rem;
+   font-size: 1.8rem;
+   color: var(--white);
    text-align: left;
+   border-radius: 0.5rem;
+   transition: all 0.3s ease;
+   position: relative;
 }
 
-.header .navbar a i{
+.header .navbar a::before {
+   content: '';
+   position: absolute;
+   left: 0;
+   bottom: 0;
+   width: 0;
+   height: 2px;
+   background-color: var(--gold);
+   transition: width 0.3s ease;
+}
+
+.header .navbar a:hover {
+   background-color: rgba(238, 166, 26, 0.2);
+   color: var(--gold);
+}
+
+.header .navbar a:hover::before {
+   width: 100%;
+}
+
+.header .navbar a i {
    margin-right: 1.5rem;
-   color:var(--main-color);
-   transition: .2s linear;
+   color: var(--gold);
+   transition: transform 0.3s ease;
 }
 
-.header .navbar a:hover i{
-   margin-right: 3rem;
+.header .navbar a:hover i {
+   transform: translateX(10px);
 }
 
 #menu-btn{
