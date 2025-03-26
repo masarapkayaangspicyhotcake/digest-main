@@ -1,0 +1,160 @@
+
+/*  Card 2 */
+.card-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    margin: 100px 0 25.4px 0; /* Approx. 3 inches on top, 1 inch at the bottom */
+    background-color: #ffffff;
+    border-radius: 0px;
+    width: 100%; /* Match the width of the first card */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow */
+}
+
+.card-2 .card-content {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.card-2 .logo-image img {
+    width: 350px; /* Set a specific width */
+    height: auto;
+    border-radius: 10px;
+}
+
+.adviser-container h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #4F0003;
+    margin-bottom: 20px;
+}
+
+
+
+/* Editorial Board & Staff Section */
+.editorial-container {
+    text-align: center;
+    max-width: auto;
+    margin: auto;
+    padding: auto;
+}
+
+/* Title Styling */
+.editorial-container h2 {
+    font-size: 28px;
+    color: #4F0003;
+    margin-bottom: 20px;
+}
+
+/* Flexbox for 2 Cards in 1 Row */
+.editorial-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* Individual Card Design */
+.card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 10px rgba(101, 10, 10, 0.2);
+    padding: 20px;
+    text-align: center;
+    width: 35%; /* Ensures 2 cards fit per row */
+    min-width: 200px;
+    border-top: 4px solid #EEA61A; /* Adds a top border */
+
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+h1 {
+    background-color: #4F0003;
+    font-family: "Poppins", sans-serif;
+    width: 40%;
+    font-size: 28px;
+    font-weight: 700;
+    color: #EEA61A;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 15px 0;
+    margin: 20px auto;
+    position: relative;
+    border-radius: 5px; /* Slightly rounded edges */
+}
+
+/* Arrow effect */
+h1::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #4F0003; /* Same as the background color */
+}
+
+
+/* Editorial Board - Second Section */
+.editorial-container2 {
+    text-align: center;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Flexbox for 4 Cards in 1 Row */
+.editorial-container2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 50px;
+    justify-content: center;
+}
+
+/* Individual Card Design */
+.cards {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(101, 10, 10, 0.2);
+    padding: 60px;
+    text-align: center;
+    border-top: 4px solid #EEA61A; /* Adds a top border */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.cards:hover {
+    transform: scale(1.05);
+}
+
+/* Profile Images */
+.card-image img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0px;
+    border: 3px solid #4F0003; /* Adds a border to images */
+}
+
+/* Text Styles */
+.cards h2 {
+    font-size: 18px;
+    color: #4F0003;
+    margin-bottom: 10px;
+}
+
+.cards p {
+    font-size: 14px;
+    color: black;
+}
+
+
