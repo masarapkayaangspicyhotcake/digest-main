@@ -1,5 +1,5 @@
 <?php
-include 'components/connect.php';
+include 'classes/database.class.php';
 include 'components/user_header.php';
 
 $db = new Database();

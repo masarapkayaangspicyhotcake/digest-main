@@ -1,5 +1,5 @@
 <?php
-require_once '../components/connect.php';
+require_once '../classes/database.class.php';
 
 $db = new Database();
 $conn = $db->connect();
@@ -48,6 +48,7 @@ if (!$fetch_profile) {
                 <li><a href="../superadmin/add_tejido.php" class="dropdown-item"><i class="fas fa-newspaper"></i> Add Tejido</a></li>
             </ul>
         </div>
+        <a href="../superadmin/org.php"><i class="fas fa-eye"></i> <span>Organizational Chart</span></a>
 
         <a href="../superadmin/view_posts.php"><i class="fas fa-home"></i> <span>Drafts</span></a>
 

@@ -18,12 +18,14 @@ if ($action === 'edit' && $orgId) {
 
 ?>
 
-<div class="modal-header">
-    <h5><?= $action === 'add' ? 'Add Member' : 'Edit Member' ?></h5>
-    <button onclick="closeModal()">&times;</button>
-</div>
-<div class="modal-body">
-    <form id="orgForm" enctype="multipart/form-data">
+<div class="organization-modal">
+    <div class="organization-modal-content">
+        <div class="organization-modal-header">
+            <h5><?= $action === 'add' ? 'Add Member' : 'Edit Member' ?></h5>
+            <button class="close-modal-btn" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="organization-modal-body">
+            <form id="orgForm" class="organization-modal-form" enctype="multipart/form-data">
         <input type="hidden" name="org_id" value="<?= htmlspecialchars($orgId) ?>">
         
         <label>Name:</label>

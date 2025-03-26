@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-include '../components/connect.php';
+include '../classes/database.class.php';
 
 $db = new Database();
 $conn = $db->connect();

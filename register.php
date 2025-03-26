@@ -1,6 +1,6 @@
 <?php
 
-include 'components/connect.php';
+include 'classes/database.class.php';
 
 session_start();
 

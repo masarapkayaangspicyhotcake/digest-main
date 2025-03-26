@@ -1,6 +1,6 @@
 <?php
 
-require_once '../components/connect.php';
+require_once '../classes/database.class.php';
 
 $db = new Database();
 $conn = $db->connect();

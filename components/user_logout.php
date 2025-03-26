@@ -1,6 +1,6 @@
 <?php
 
-include 'connect.php';
+include 'database.class.php';
 
 session_start();
 session_unset();
