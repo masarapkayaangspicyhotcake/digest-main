@@ -158,3 +158,87 @@ h1::after {
 }
 
 
+/* Responsive Breakpoints */
+@media screen and (max-width: 1200px) {
+    .card-2 {
+        flex-direction: column;
+        padding: 30px;
+        margin: 50px 0;
+    }
+
+    .card-2 .card-content {
+        margin-right: 0;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .card-2 .logo-image img {
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Editorial Board & Staff Section */
+    .editorial-container h2 {
+        font-size: 24px;
+    }
+
+    .editorial-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+        max-width: 350px;
+    }
+
+    /* Editorial Board - Second Section */
+    .editorial-container2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .cards {
+        padding: 40px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card-2 {
+        padding: 20px;
+        margin: 30px 0;
+    }
+
+    .card-2 .logo-image img {
+        width: 200px;
+    }
+
+    h1 {
+        width: 90%;
+        font-size: 22px;
+        padding: 10px 0;
+    }
+
+    .editorial-container2 {
+        grid-template-columns: 1fr;
+    }
+
+    .cards {
+        padding: 30px;
+    }
+
+    .card-image img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .cards h2 {
+        font-size: 16px;
+    }
+
+    .cards p {
+        font-size: 12px;
+    }
+}
+
